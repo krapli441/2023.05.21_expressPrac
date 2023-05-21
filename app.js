@@ -1,4 +1,4 @@
-import express from "express";
+import express, { response } from "express";
 
 const app = express();
 const port = process.env.PORT || 2080;
@@ -18,6 +18,18 @@ app.use((err, req, res, next) => {
   res.type("text/plain");
   res.status(500);
   res.send("500 - Internal Server Error");
+});
+
+// index.html과 about.html 경로 생성
+
+app.get("/", (req, res) => {
+  res.type("text/html");
+  res.sendFile(__dirname + "/index.html");
+});
+
+app.get("/about", (req, res) => {
+  res.type("text/html");
+  res.sendFile(__dirname + "/about.html");
 });
 
 app.listen(port, () => {
